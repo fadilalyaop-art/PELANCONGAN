@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warung Selera — Hidangan Istimewa Malaysia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #0d0a06;
+    color: #f5ede0;
+    min-height: 100vh;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 10, 6, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212, 168, 94, 0.2);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: #d4a85e;
+    letter-spacing: 1px;
+  }
+
+  .logo span { color: #f5ede0; }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: #b09070;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: #d4a85e; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    padding: 4rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(212, 168, 94, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 10% 80%, rgba(180, 80, 40, 0.08) 0%, transparent 50%),
+      #0d0a06;
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(212, 168, 94, 0.03) 40px,
+      rgba(212, 168, 94, 0.03) 41px
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 620px;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(212, 168, 94, 0.15);
+    border: 1px solid rgba(212, 168, 94, 0.3);
+    color: #d4a85e;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 78px);
+    font-weight: 900;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: #d4a85e;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: #8a7060;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    max-width: 480px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: #d4a85e;
+    color: #0d0a06;
+    border: none;
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #e6bc72; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: #d4a85e;
+    border: 1px solid rgba(212, 168, 94, 0.4);
+    padding: 14px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-outline:hover { border-color: #d4a85e; background: rgba(212, 168, 94, 0.08); }
+
+  .hero-image {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42%;
+    max-width: 440px;
+  }
+
+  .food-visual {
+    width: 100%;
+    aspect-ratio: 1;
+    background: radial-gradient(circle at 50% 45%, rgba(212, 168, 94, 0.25) 0%, rgba(180, 80, 40, 0.15) 50%, transparent 75%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 120px;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-14px); }
+  }
+
+  /* ===== STATS BAR ===== */
+  .stats-bar {
+    background: rgba(255,255,255,0.03);
+    border-top: 1px solid rgba(212, 168, 94, 0.1);
+    border-bottom: 1px solid rgba(212, 168, 94, 0.1);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .stat { text-align: center; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #d4a85e;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: #6a5a4a;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 5rem 2rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #d4a85e;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #f5ede0;
+  }
+
+  .divider {
+    width: 48px;
+    height: 2px;
+    background: #d4a85e;
+    margin: 1.25rem auto 0;
+    border-radius: 1px;
+  }
+
+  /* ===== MENU ===== */
+  .menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    background: transparent;
+    border: 1px solid rgba(212, 168, 94, 0.2);
+    color: #8a7060;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .tab-btn.active, .tab-btn:hover {
+    background: rgba(212, 168, 94, 0.12);
+    border-color: #d4a85e;
+    color: #d4a85e;
+  }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .menu-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 168, 94, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    cursor: pointer;
+  }
+
+  .menu-card:hover {
+    border-color: rgba(212, 168, 94, 0.4);
+    transform: translateY(-3px);
+  }
+
+  .menu-emoji {
+    font-size: 36px;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .menu-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #f0e0cc;
+    margin-bottom: 0.4rem;
+  }
+
+  .menu-desc {
+    font-size: 13px;
+    color: #6a5a4a;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+
+  .menu-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .menu-price {
+    font-size: 17px;
+    font-weight: 500;
+    color: #d4a85e;
+  }
+
+  .menu-tag {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    background: rgba(212, 168, 94, 0.1);
+    color: #d4a85e;
+    border: 1px solid rgba(212, 168, 94, 0.2);
+  }
+
+  /* ===== PROMO ===== */
+  .promo-section {
+    background: rgba(212, 168, 94, 0.06);
+    border-top: 1px solid rgba(212, 168, 94, 0.1);
+    border-bottom: 1px solid rgba(212, 168, 94, 0.1);
+    padding: 4rem 2rem;
+  }
+
+  .promo-inner {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .promo-emoji { font-size: 56px; }
+
+  .promo-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #d4a85e;
+    margin-bottom: 0.5rem;
+  }
+
+  .promo-text p {
+    color: #8a7060;
+    font-size: 15px;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials { background: #0a0805; }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.25rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .testi-card {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(212, 168, 94, 0.08);
+    border-radius: 10px;
+    padding: 1.5rem;
+  }
+
+  .stars { color: #d4a85e; font-size: 14px; margin-bottom: 0.75rem; }
+
+  .testi-text {
+    font-size: 14px;
+    color: #8a7060;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .testi-author {
+    font-size: 13px;
+    font-weight: 500;
+    color: #c0a880;
+  }
+
+  /* ===== CONTACT ===== */
+  .contact-section {
+    max-width: 860px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .contact-info h3,
+  .res-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    margin-bottom: 1.25rem;
+    color: #f0e0cc;
+  }
+
+  .contact-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 1rem;
+  }
+
+  .contact-icon { font-size: 18px; margin-top: 1px; }
+
+  .contact-detail {
+    font-size: 14px;
+    color: #8a7060;
+    line-height: 1.5;
+  }
+
+  .contact-detail strong {
+    color: #c0a880;
+    font-weight: 500;
+    display: block;
+  }
+
+  /* ===== FORM ===== */
+  .form-group { margin-bottom: 1rem; }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212, 168, 94, 0.15);
+    color: #f5ede0;
+    padding: 11px 14px;
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    color-scheme: dark;
+  }
+
+  .form-group input::placeholder { color: #5a4a3a; }
+  .form-group input:focus,
+  .form-group select:focus { border-color: rgba(212, 168, 94, 0.5); }
+  .form-group select option { background: #1a1510; }
+
+  .booking-msg {
+    display: none;
+    margin-top: 0.75rem;
+    font-size: 13px;
+    color: #d4a85e;
+    text-align: center;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: #060504;
+    border-top: 1px solid rgba(212, 168, 94, 0.1);
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #d4a85e;
+    margin-bottom: 0.5rem;
+    font-weight: 900;
+  }
+
+  footer p { font-size: 12px; color: #4a3a2a; }
+
+  /* ===== UTILS ===== */
+  .hidden { display: none; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero-image { display: none; }
+    .contact-section { grid-template-columns: 1fr; gap: 2rem; }
+    .nav-links { gap: 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 38px; }
+    nav { padding: 0 1rem; }
+    section { padding: 3rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="logo">Warung <span>Selera</span></div>
+  <ul class="nav-links">
+    <li><a onclick="showSection('home')" class="active" id="nav-home">Utama</a></li>
+    <li><a onclick="showSection('menu')" id="nav-menu">Menu</a></li>
+    <li><a onclick="showSection('promo')" id="nav-promo">Promosi</a></li>
+    <li><a onclick="showSection('contact')" id="nav-contact">Hubungi</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HOME ===== -->
+<div id="section-home">
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🍽 Hidangan Istimewa Malaysia</div>
+      <h1>Rasa yang <em>Memori</em> di Hati</h1>
+      <p>Nikmati kelazatan masakan asli Malaysia — dimasak dengan rempah pilihan dan resepi turun-temurun yang autentik sejak 1985.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="showSection('menu')">Lihat Menu →</button>
+        <button class="btn-outline" onclick="showSection('contact')">Buat Tempahan</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <div class="food-visual">🍛</div>
+    </div>
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat">
+      <span class="stat-num">39+</span>
+      <span class="stat-label">Tahun Berkhidmat</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">60+</span>
+      <span class="stat-label">Item Menu</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">4.9★</span>
+      <span class="stat-label">Rating Pelanggan</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">1000+</span>
+      <span class="stat-label">Pelanggan Setia</span>
+    </div>
+  </div>
+
+  <section class="testimonials">
+    <div class="section-header">
+      <span class="section-tag">Kata Pelanggan</span>
+      <h2 class="section-title">Mereka Sudah Cuba</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Nasi lemak paling sedap yang pernah saya makan! Sambal dia pekat dan berkuah, memang terbaik!"</p>
+        <div class="testi-author">— Hafizah, Kuala Lumpur</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★★</div>
+        <p class="testi-text">"Rendang tok dia macam masakan nenek sendiri. Setiap minggu mesti singgah sini untuk makan tengah hari."</p>
+        <div class="testi-author">— Ahmad Rizal, Petaling Jaya</div>
+      </div>
+      <div class="testi-card">
+        <div class="stars">★★★★☆</div>
+        <p class="testi-text">"Mee goreng mamak dan teh tarik kombinasi paling power. Tempat ni memang jadi pilihan keluarga kami."</p>
+        <div class="testi-author">— Priya, Shah Alam</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ===== MENU ===== -->
+<div id="section-menu" class="hidden">
+  <section>
+    <div class="section-header">
+      <span class="section-tag">Menu Kami</span>
+      <h2 class="section-title">Pilihan Hidangan</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-tabs">
+      <button class="tab-btn active" onclick="filterMenu('semua', this)">Semua</button>
+      <button class="tab-btn" onclick="filterMenu('nasi', this)">Nasi</button>
+      <button class="tab-btn" onclick="filterMenu('mee', this)">Mee & Mihun</button>
+      <button class="tab-btn" onclick="filterMenu('minuman', this)">Minuman</button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+</div>
+
+<!-- ===== PROMO ===== -->
+<div id="section-promo" class="hidden">
+  <div class="promo-section">
+    <div class="promo-inner">
+      <div class="promo-emoji">🎉</div>
+      <div class="promo-text">
+        <h2>Promosi Hari Ini</h2>
+        <p>Jimat lebih banyak dengan tawaran istimewa kami setiap hari!</p>
+      </div>
+    </div>
+  </div>
+  <section>
+    <div class="section-header">
+      <span class="section-tag">Tawaran Terhad</span>
+      <h2 class="section-title">Jimat Lebih Banyak</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <span class="menu-emoji">🍚</span>
+        <div class="menu-name">Set Lunch Jimat</div>
+        <div class="menu-desc">Nasi + Lauk 3 pilihan + Air = RM15 sahaja (biasa RM22)</div>
+        <div class="menu-footer">
+          <span class="menu-price">RM 15.00</span>
+          <span class="menu-tag">Isnin–Jumaat</span>
+        </div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">👨‍👩‍👧‍👦</span>
+        <div class="menu-name">Pakej Keluarga</div>
+        <div class="menu-desc">4 nasi + 2 minuman + 1 dessert. Sesuai untuk makan bersama.</div>
+        <div class="menu-footer">
+          <span class="menu-price">RM 55.00</span>
+          <span class="menu-tag">Hujung Minggu</span>
+        </div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">🌙</span>
+        <div class="menu-name">Happy Hour</div>
+        <div class="menu-desc">Diskaun 20% untuk semua minuman panas dari pukul 3–5 petang.</div>
+        <div class="menu-footer">
+          <span class="menu-price">-20%</span>
+          <span class="menu-tag">Setiap Hari</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== CONTACT ===== -->
+<div id="section-contact" class="hidden">
+  <section>
+    <div class="section-header">
+      <span class="section-tag">Jumpa Kami</span>
+      <h2 class="section-title">Hubungi & Tempahan</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-section">
+      <div class="contact-info">
+        <h3>Maklumat Restoran</h3>
+        <div class="contact-row">
+          <span class="contact-icon">📍</span>
+          <div class="contact-detail">
+            <strong>Alamat</strong>
+            No. 12, Jalan Bukit Bintang,<br>
+            55100 Kuala Lumpur, Malaysia
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">📞</span>
+          <div class="contact-detail">
+            <strong>Telefon</strong>
+            +60 3-2143 8899<br>
+            +60 11-2233 4455
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">🕐</span>
+          <div class="contact-detail">
+            <strong>Waktu Operasi</strong>
+            Isnin–Sabtu: 7 pagi – 10 malam<br>
+            Ahad: 8 pagi – 9 malam
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="contact-icon">📱</span>
+          <div class="contact-detail">
+            <strong>Media Sosial</strong>
+            @WarungSelera di Instagram & Facebook
+          </div>
+        </div>
+      </div>
+
+      <div class="res-form">
+        <h3>Buat Tempahan</h3>
+        <div class="form-group">
+          <input type="text" placeholder="Nama anda" id="nama" />
+        </div>
+        <div class="form-group">
+          <input type="tel" placeholder="No. telefon" id="telefon" />
+        </div>
+        <div class="form-group">
+          <input type="date" id="tarikh" />
+        </div>
+        <div class="form-group">
+          <select id="tetamu">
+            <option value="">Bilangan tetamu</option>
+            <option>2 orang</option>
+            <option>4 orang</option>
+            <option>6 orang</option>
+            <option>8 orang</option>
+            <option>10+ orang (hubungi terus)</option>
+          </select>
+        </div>
+        <button class="btn-primary" style="width:100%; margin-top:0.5rem;" onclick="handleBooking()">
+          Hantar Tempahan
+        </button>
+        <div class="booking-msg" id="bookingMsg">
+          ✓ Tempahan berjaya! Kami akan hubungi anda tidak lama lagi.
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-logo">Warung Selera</div>
+  <p>© 2025 Warung Selera. Semua hak terpelihara. Dibina dengan ❤ di Malaysia.</p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+  // ── Data Menu ──────────────────────────────────────
+  const menuItems = [
+    {
+      emoji: '🍛', name: 'Nasi Lemak Istimewa',
+      desc: 'Nasi santan harum dengan sambal udang, telur, ikan bilis & rendang ayam.',
+      price: 'RM 12.00', tag: 'Popular', cat: 'nasi'
+    },
+    {
+      emoji: '🍖', name: 'Nasi Kandar Penang',
+      desc: 'Nasi putih dengan kari ayam, daging, dan kuah campur berlapis.',
+      price: 'RM 14.00', tag: 'Best Seller', cat: 'nasi'
+    },
+    {
+      emoji: '🍲', name: 'Nasi Minyak Beriani',
+      desc: 'Nasi minyak wangi dengan ayam golek dan acar timun segar.',
+      price: 'RM 16.00', tag: 'Istimewa', cat: 'nasi'
+    },
+    {
+      emoji: '🍝', name: 'Mee Goreng Mamak',
+      desc: 'Mee kuning goreng pedas dengan telur, tauhu, udang dan limau nipis.',
+      price: 'RM 9.00', tag: 'Popular', cat: 'mee'
+    },
+    {
+      emoji: '🍜', name: 'Laksa Asam Johor',
+      desc: 'Mihun dalam kuah asam ikan pekat dengan timun, bawang dan daun kesum.',
+      price: 'RM 10.00', tag: 'Tradisi', cat: 'mee'
+    },
+    {
+      emoji: '🥘', name: 'Mihun Sup Tulang',
+      desc: 'Mihun lembut dalam sup tulang sapi pekat dengan herba pilihan.',
+      price: 'RM 13.00', tag: 'Baru', cat: 'mee'
+    },
+    {
+      emoji: '☕', name: 'Teh Tarik',
+      desc: 'Teh susu pekat yang ditarik berkali-kali hingga berbuih lebat.',
+      price: 'RM 3.50', tag: 'Klasik', cat: 'minuman'
+    },
+    {
+      emoji: '🥤', name: 'Air Bandung',
+      desc: 'Air mawar segar dengan susu pekat. Dingin dan menyegarkan.',
+      price: 'RM 4.00', tag: 'Segar', cat: 'minuman'
+    },
+    {
+      emoji: '🍵', name: 'Kopi O Kaw',
+      desc: 'Kopi hitam pekat khas Malaysia tanpa susu. Sesuai untuk pagi hari.',
+      price: 'RM 3.00', tag: 'Klasik', cat: 'minuman'
+    },
+  ];
+
+  // ── Render Menu ────────────────────────────────────
+  function renderMenu(filter) {
+    const grid = document.getElementById('menuGrid');
+    const items = filter === 'semua'
+      ? menuItems
+      : menuItems.filter(i => i.cat === filter);
+
+    grid.innerHTML = items.map(i => `
+      <div class="menu-card">
+        <span class="menu-emoji">${i.emoji}</span>
+        <div class="menu-name">${i.name}</div>
+        <div class="menu-desc">${i.desc}</div>
+        <div class="menu-footer">
+          <span class="menu-price">${i.price}</span>
+          <span class="menu-tag">${i.tag}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // ── Filter Tab ─────────────────────────────────────
+  function filterMenu(cat, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMenu(cat);
+  }
+
+  // ── Navigation ─────────────────────────────────────
+  function showSection(id) {
+    ['home', 'menu', 'promo', 'contact'].forEach(s => {
+      document.getElementById('section-' + s).classList.add('hidden');
+      const nav = document.getElementById('nav-' + s);
+      if (nav) nav.classList.remove('active');
+    });
+    document.getElementById('section-' + id).classList.remove('hidden');
+    const activeNav = document.getElementById('nav-' + id);
+    if (activeNav) activeNav.classList.add('active');
+    if (id === 'menu') renderMenu('semua');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── Booking Form ───────────────────────────────────
+  function handleBooking() {
+    const nama = document.getElementById('nama').value.trim();
+    const telefon = document.getElementById('telefon').value.trim();
+    const tarikh = document.getElementById('tarikh').value;
+    const tetamu = document.getElementById('tetamu').value;
+
+    if (!nama || !telefon || !tarikh || !tetamu) {
+      alert('Sila lengkapkan semua maklumat tempahan.');
+      return;
+    }
+
+    const msg = document.getElementById('bookingMsg');
+    msg.style.display = 'block';
+    setTimeout(() => { msg.style.display = 'none'; }, 5000);
+
+    // Reset form
+    document.getElementById('nama').value = '';
+    document.getElementById('telefon').value = '';
+    document.getElementById('tarikh').value = '';
+    document.getElementById('tetamu').value = '';
+  }
+
+  // Init
+  renderMenu('semua');
+</script>
+
+</body>
+</html>
